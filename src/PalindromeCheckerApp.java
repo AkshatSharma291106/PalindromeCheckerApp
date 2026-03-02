@@ -36,6 +36,22 @@ public class PalindromeCheckerApp {
         return input.equals(reversed);
     }
     
+    // UC4: Character Array Method
+    public static boolean isPalindromeCharArray(String input) {
+        char[] chars = input.toCharArray();
+        int left = 0;
+        int right = chars.length - 1;
+        
+        while (left < right) {
+            if (chars[left] != chars[right]) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -44,11 +60,19 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC2: Hardcoded Palindrome ---");
         checkHardcodedPalindrome();
         
+        // Test strings
+        String[] testStrings = {"madam", "radar", "civic", "refer", "hello"};
+        
         // UC3: String Reverse Method
         System.out.println("\n--- UC3: String Reverse Method ---");
-        String[] testStrings = {"madam", "radar", "civic", "refer", "hello"};
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeReverse(str));
+        }
+        
+        // UC4: Character Array Method
+        System.out.println("\n--- UC4: Character Array Method ---");
+        for (String str : testStrings) {
+            System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeCharArray(str));
         }
     }
 }
