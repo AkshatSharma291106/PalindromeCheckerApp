@@ -156,6 +156,17 @@ public class PalindromeCheckerApp {
         return true;
     }
     
+    // UC9: Recursive Method
+    public static boolean isPalindromeRecursive(String input, int left, int right) {
+        if (left >= right) {
+            return true;
+        }
+        if (input.charAt(left) != input.charAt(right)) {
+            return false;
+        }
+        return isPalindromeRecursive(input, left + 1, right - 1);
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -201,6 +212,13 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC8: Linked List Method ---");
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeLinkedList(str));
+        }
+        
+        // UC9: Recursive Method
+        System.out.println("\n--- UC9: Recursive Method ---");
+        for (String str : testStrings) {
+            System.out.println("Input: " + str + " | Is Palindrome? " + 
+                isPalindromeRecursive(str, 0, str.length() - 1));
         }
     }
 }
