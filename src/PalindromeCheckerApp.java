@@ -173,6 +173,39 @@ public class PalindromeCheckerApp {
         return isPalindromeRecursive(cleaned, 0, cleaned.length() - 1);
     }
     
+    // UC11: Object-Oriented Service
+    static class PalindromeService {
+        private String input;
+        
+        public PalindromeService(String input) {
+            this.input = input;
+        }
+        
+        public boolean checkWithReverse() {
+            return isPalindromeReverse(input);
+        }
+        
+        public boolean checkWithCharArray() {
+            return isPalindromeCharArray(input);
+        }
+        
+        public boolean checkWithStack() {
+            return isPalindromeStack(input);
+        }
+        
+        public boolean checkWithDeque() {
+            return isPalindromeDeque(input);
+        }
+        
+        public void printResults() {
+            System.out.println("Palindrome check results for: '" + input + "'");
+            System.out.println("  Reverse Method: " + checkWithReverse());
+            System.out.println("  CharArray Method: " + checkWithCharArray());
+            System.out.println("  Stack Method: " + checkWithStack());
+            System.out.println("  Deque Method: " + checkWithDeque());
+        }
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -233,5 +266,10 @@ public class PalindromeCheckerApp {
         for (String str : testStringsWithSpace) {
             System.out.println("Input: '" + str + "' | Is Palindrome? " + isPalindromeIgnoreCaseSpace(str));
         }
+        
+        // UC11: Object-Oriented Service
+        System.out.println("\n--- UC11: Object-Oriented Service ---");
+        PalindromeService service = new PalindromeService("radar");
+        service.printResults();
     }
 }
