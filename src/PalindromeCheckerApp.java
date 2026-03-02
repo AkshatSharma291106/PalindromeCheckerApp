@@ -1,4 +1,4 @@
-﻿import java.util.*;
+import java.util.*;
 
 public class PalindromeCheckerApp {
     
@@ -103,6 +103,59 @@ public class PalindromeCheckerApp {
         return true;
     }
     
+    // UC8: Linked List Method
+    static class ListNode {
+        char val;
+        ListNode next;
+        ListNode(char val) { this.val = val; }
+    }
+    
+    public static boolean isPalindromeLinkedList(String input) {
+        // Create linked list
+        ListNode head = null;
+        ListNode tail = null;
+        for (int i = 0; i < input.length(); i++) {
+            ListNode newNode = new ListNode(input.charAt(i));
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+        
+        // Find middle using fast/slow pointer
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        // Reverse second half
+        ListNode prev = null;
+        ListNode curr = slow;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        // Compare first and second half
+        ListNode left = head;
+        ListNode right = prev;
+        while (right != null) {
+            if (left.val != right.val) {
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        return true;
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -112,7 +165,7 @@ public class PalindromeCheckerApp {
         checkHardcodedPalindrome();
         
         // Test strings
-        String[] testStrings = {"madam", "radar", "civic", "refer", "hello"};
+        String[] testStrings = {"madam", "radar", "civic", "refer", "level", "hello"};
         
         // UC3: String Reverse Method
         System.out.println("\n--- UC3: String Reverse Method ---");
@@ -142,6 +195,12 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC7: Deque Method ---");
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeDeque(str));
+        }
+        
+        // UC8: Linked List Method
+        System.out.println("\n--- UC8: Linked List Method ---");
+        for (String str : testStrings) {
+            System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeLinkedList(str));
         }
     }
 }
