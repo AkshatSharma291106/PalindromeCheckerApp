@@ -68,6 +68,25 @@ public class PalindromeCheckerApp {
         return true;
     }
     
+    // UC6: Queue + Stack Method
+    public static boolean isPalindromeQueueStack(String input) {
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+        
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            queue.add(c);
+            stack.push(c);
+        }
+        
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -95,6 +114,12 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC5: Stack Method ---");
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeStack(str));
+        }
+        
+        // UC6: Queue + Stack Method
+        System.out.println("\n--- UC6: Queue + Stack Method ---");
+        for (String str : testStrings) {
+            System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeQueueStack(str));
         }
     }
 }
