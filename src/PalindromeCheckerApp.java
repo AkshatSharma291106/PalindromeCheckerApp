@@ -87,6 +87,22 @@ public class PalindromeCheckerApp {
         return true;
     }
     
+    // UC7: Deque Method
+    public static boolean isPalindromeDeque(String input) {
+        Deque<Character> deque = new LinkedList<>();
+        
+        for (int i = 0; i < input.length(); i++) {
+            deque.addLast(input.charAt(i));
+        }
+        
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -120,6 +136,12 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC6: Queue + Stack Method ---");
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeQueueStack(str));
+        }
+        
+        // UC7: Deque Method
+        System.out.println("\n--- UC7: Deque Method ---");
+        for (String str : testStrings) {
+            System.out.println("Input: " + str + " | Is Palindrome? " + isPalindromeDeque(str));
         }
     }
 }
