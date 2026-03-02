@@ -167,6 +167,12 @@ public class PalindromeCheckerApp {
         return isPalindromeRecursive(input, left + 1, right - 1);
     }
     
+    // UC10: Case-Insensitive & Space-Ignored
+    public static boolean isPalindromeIgnoreCaseSpace(String input) {
+        String cleaned = input.replaceAll("\\s+", "").toLowerCase();
+        return isPalindromeRecursive(cleaned, 0, cleaned.length() - 1);
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -177,6 +183,7 @@ public class PalindromeCheckerApp {
         
         // Test strings
         String[] testStrings = {"madam", "radar", "civic", "refer", "level", "hello"};
+        String[] testStringsWithSpace = {"A man a plan a canal Panama", "Was it a car or a cat I saw", "hello world"};
         
         // UC3: String Reverse Method
         System.out.println("\n--- UC3: String Reverse Method ---");
@@ -219,6 +226,12 @@ public class PalindromeCheckerApp {
         for (String str : testStrings) {
             System.out.println("Input: " + str + " | Is Palindrome? " + 
                 isPalindromeRecursive(str, 0, str.length() - 1));
+        }
+        
+        // UC10: Case-Insensitive & Space-Ignored
+        System.out.println("\n--- UC10: Case-Insensitive & Space-Ignored ---");
+        for (String str : testStringsWithSpace) {
+            System.out.println("Input: '" + str + "' | Is Palindrome? " + isPalindromeIgnoreCaseSpace(str));
         }
     }
 }
