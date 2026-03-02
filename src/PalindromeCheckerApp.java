@@ -247,6 +247,50 @@ public class PalindromeCheckerApp {
         }
     }
     
+    // UC13: Performance Comparison
+    public static void comparePerformance(String input) {
+        System.out.println("\n--- Performance Comparison for: '" + input + "' ---");
+        
+        long startTime, endTime;
+        boolean result;
+        
+        // Test UC3: Reverse Method
+        startTime = System.nanoTime();
+        result = isPalindromeReverse(input);
+        endTime = System.nanoTime();
+        System.out.println("Reverse Method: " + (endTime - startTime) + " ns | Result: " + result);
+        
+        // Test UC4: CharArray Method
+        startTime = System.nanoTime();
+        result = isPalindromeCharArray(input);
+        endTime = System.nanoTime();
+        System.out.println("CharArray Method: " + (endTime - startTime) + " ns | Result: " + result);
+        
+        // Test UC5: Stack Method
+        startTime = System.nanoTime();
+        result = isPalindromeStack(input);
+        endTime = System.nanoTime();
+        System.out.println("Stack Method: " + (endTime - startTime) + " ns | Result: " + result);
+        
+        // Test UC7: Deque Method
+        startTime = System.nanoTime();
+        result = isPalindromeDeque(input);
+        endTime = System.nanoTime();
+        System.out.println("Deque Method: " + (endTime - startTime) + " ns | Result: " + result);
+        
+        // Test UC8: Linked List Method
+        startTime = System.nanoTime();
+        result = isPalindromeLinkedList(input);
+        endTime = System.nanoTime();
+        System.out.println("Linked List Method: " + (endTime - startTime) + " ns | Result: " + result);
+        
+        // Test UC9: Recursive Method
+        startTime = System.nanoTime();
+        result = isPalindromeRecursive(input, 0, input.length() - 1);
+        endTime = System.nanoTime();
+        System.out.println("Recursive Method: " + (endTime - startTime) + " ns | Result: " + result);
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -328,5 +372,10 @@ public class PalindromeCheckerApp {
         
         context.setStrategy(new DequeStrategy());
         System.out.println("DequeStrategy on 'refer': " + context.executeStrategy("refer"));
+        
+        // UC13: Performance Comparison
+        comparePerformance("madam");
+        comparePerformance("radar");
+        comparePerformance("civic");
     }
 }
