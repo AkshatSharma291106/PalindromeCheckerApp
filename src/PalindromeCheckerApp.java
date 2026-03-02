@@ -11,8 +11,28 @@ public class PalindromeCheckerApp {
         System.out.println("========================================");
     }
     
+    // UC2: Hardcoded Palindrome
+    public static void checkHardcodedPalindrome() {
+        String str = "madam";
+        String reversed = "";
+        
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed += str.charAt(i);
+        }
+        
+        if (str.equals(reversed)) {
+            System.out.println("UC2 - Hardcoded String 'madam' is a palindrome!");
+        } else {
+            System.out.println("UC2 - Hardcoded String 'madam' is NOT a palindrome!");
+        }
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
+        
+        // UC2: Check Hardcoded Palindrome
+        System.out.println("\n--- UC2: Hardcoded Palindrome ---");
+        checkHardcodedPalindrome();
     }
 }
