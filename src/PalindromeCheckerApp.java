@@ -206,6 +206,47 @@ public class PalindromeCheckerApp {
         }
     }
     
+    // UC12: Strategy Pattern
+    interface PalindromeStrategy {
+        boolean check(String str);
+    }
+    
+    static class ReverseStrategy implements PalindromeStrategy {
+        public boolean check(String str) {
+            return isPalindromeReverse(str);
+        }
+    }
+    
+    static class CharArrayStrategy implements PalindromeStrategy {
+        public boolean check(String str) {
+            return isPalindromeCharArray(str);
+        }
+    }
+    
+    static class StackStrategy implements PalindromeStrategy {
+        public boolean check(String str) {
+            return isPalindromeStack(str);
+        }
+    }
+    
+    static class DequeStrategy implements PalindromeStrategy {
+        public boolean check(String str) {
+            return isPalindromeDeque(str);
+        }
+    }
+    
+    static class PalindromeContext {
+        private PalindromeStrategy strategy;
+        
+        public void setStrategy(PalindromeStrategy strategy) {
+            this.strategy = strategy;
+        }
+        
+        public boolean executeStrategy(String str) {
+            return strategy.check(str);
+        }
+    }
+    
     public static void main(String[] args) {
         // UC1: Display Welcome Message
         displayWelcomeMessage();
@@ -271,5 +312,21 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC11: Object-Oriented Service ---");
         PalindromeService service = new PalindromeService("radar");
         service.printResults();
+        
+        // UC12: Strategy Pattern
+        System.out.println("\n--- UC12: Strategy Pattern ---");
+        PalindromeContext context = new PalindromeContext();
+        
+        context.setStrategy(new ReverseStrategy());
+        System.out.println("ReverseStrategy on 'madam': " + context.executeStrategy("madam"));
+        
+        context.setStrategy(new CharArrayStrategy());
+        System.out.println("CharArrayStrategy on 'radar': " + context.executeStrategy("radar"));
+        
+        context.setStrategy(new StackStrategy());
+        System.out.println("StackStrategy on 'civic': " + context.executeStrategy("civic"));
+        
+        context.setStrategy(new DequeStrategy());
+        System.out.println("DequeStrategy on 'refer': " + context.executeStrategy("refer"));
     }
 }
